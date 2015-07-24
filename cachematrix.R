@@ -58,12 +58,19 @@ testCacheMatrix <- function() {
 
 	cat("\nCalculate inverse matrix(called from cache)\n")
 	t <- proc.time()
-	inv1 <- cacheSolve(y)
+	inv2 <- cacheSolve(y)
 	print(proc.time()-t)
 
-	cat("\nCalculate inverse matrix usually\n")
+	cat("\nCalculate inverse matrix directly\n")
 	t <- proc.time()
-	inv1 <- solve(x)
+	inv3 <- solve(x)
 	print(proc.time()-t)
-}
 
+	cat("\nConfirm a part of the matrix product X %*% Xinv(cache)\n")
+	z2 <- x %*% inv2
+	print(z2[1:3,1:3])
+
+	cat("\nConfirm a part of the matrix product X %*% Xinv(direct)\n")
+	z3 <- x %*% inv3
+	print(z3[1:3,1:3])
+}
